@@ -1,0 +1,101 @@
+
+<!DOCTYPE HTML >
+<html>
+  <head>
+  <style>
+      *{margin:0;padding:5px;}
+      html,body{
+          height:100%;
+      }
+      .head{    
+            width:30%;
+      }
+      .body{
+            background: url(huoche.jpg) no-repeat;
+            height:80%;
+            width:100%;
+            background-size: 100%;
+            opacity: 0.5;
+            filter: alpha(opacity=50;);
+            padding-bottom:5px;
+	          border-top: 40px solid #8414b1;
+            border-bottom: 2px solid #8414b1;
+            
+      }
+      .login {
+	          margin-top:20px;
+          	margin-left: 50px;
+	          padding-top: 50px;
+	          padding-left: 20px;
+	          width: 400px;
+	          height:300px;
+            border-style: 5px solid black;
+          }
+        .choose{
+          width:100px;
+          height: 10px;
+          font-size: medium;
+          
+        }
+        
+        .shuru{
+          width:300px;
+          height:300px;
+          font-size:medium;
+          padding-left: 105px;
+        }
+      ul {
+          list-style-type: none;
+          margin: 0;
+          padding: 0;
+          overflow: hidden;
+          background-color: #333;
+        }
+
+      li {
+         float: left;
+          }
+
+      li a {
+          display: block;
+          color: white;
+          text-align: center;
+          padding: 14px 15px;
+          text-decoration: none;
+          }
+
+      li a:hover,a:active {
+         background-color: #111;
+        }
+      
+
+      
+  </style>
+  </head>
+  
+  <body>
+  <div class="head">	
+		<img src="images/12307.jpg" height="50px">
+  </div>
+  <div class="body">
+    <div class="login">
+      <div class="choose">
+        <ul>
+          <li><a href="#管理员">管理员登录</a></li>
+          <li><a href="#用户登录">用户登录</a></li>
+          <li><a href="#用户注册">用户注册</a></li>
+        </ul>
+      </div>
+      <div class="shuru">
+        <p>用户名：</p><br>
+        <input type=text" name="user"><br>
+        <p>密码：</p><br>
+        <input type="password" name="password"><br>
+        <button type="submit">提交</button>
+      </div>
+    </div>
+  </div>
+
+  
+  </body>
+</html>

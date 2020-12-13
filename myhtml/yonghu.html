@@ -1,0 +1,124 @@
+<!DOCTYPE HTML >
+<html>
+  <head>
+  <style>
+      *{margin:0;padding:5px;}
+      html,body{
+          height:100%;
+          box-sizing: border-box;
+      }
+      .head1{
+          height:10%;
+          width:30%;
+          float:left;
+      }
+      .head2{
+          margin-left: 30px;
+          color:mediumslateblue;
+          font-size: 20px;
+          float:left;
+      }
+      .body{
+            height:80%;
+            width:100%;
+            
+            border-bottom: 2px solid #8414b1;
+            padding-bottom: 20px;
+      }
+      .navbar{
+          overflow:hidden;
+          width:100%;
+          background-color: mediumslateblue;
+      }
+      .navbar a{
+          float:left;
+          display:block;
+          color:white;
+          text-align: center;
+          padding:15px 110px;
+          text-decoration: none;
+      }
+      .navbar a:hover,a:active{
+          background-color: #9932cc;
+      }
+      .row:after{
+         content:"";
+         display:table;
+         clear:both;
+      }
+      .side{
+          float:left;
+          
+          padding:5px;
+      }
+      .main{
+          float:left;
+          width:70%;
+          padding:5px;
+      }
+      #zhandian{
+          
+          border-collapse: collapse;
+      }
+      #zhandian th{
+            font-size:medium;
+            border: 2px solid black;
+            background-color: rebeccapurple;
+            color:white;
+      }
+      #zhandian td{
+            font-size:medium;
+            border: 2px solid black;
+            color:black;
+      }
+      .search{
+          height:50px;
+          border-style: solid 5px  rebeccapurple;
+      }
+    </style>
+    </head>
+    <body>
+        <div class="head1">	
+            <img src="images/12307.jpg" height="50px">
+        </div>
+        <div class="head2">Welcome!</div><br>
+
+        <div class="body">
+            
+            <div class="navbar">
+                <a href="首页">首页</a>
+                <a href="车票">车票</a>
+                <a href="订单">订单</a>
+                <a href="个人中心">个人中心</a>
+            </div>
+            <div class="row">    
+                <div class="side">
+                    <table id="zhandian">
+                        <tr>
+                            <th>站点ID</th>
+                            <th>站点名称</th>
+                        </tr>
+                        <tr >
+                            <td>001</td>
+                            <td>北京</td>
+                        </tr>
+                        <tr >
+                            <td>002</td>
+                            <td>天津</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="main">
+                    <div class="search">
+                        出发地<input type="text" name="from">&nbsp;&nbsp;
+                        目的地<input type="text" name="to">&nbsp;&nbsp;
+                        出发日期<input type="date" name="date"><br>
+                        <button type="submit">筛选</button>
+                    
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </body>
+</html>
