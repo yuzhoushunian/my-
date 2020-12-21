@@ -1,6 +1,11 @@
 <!DOCTYPE HTML >
 <html>
   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="">
+    <script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
   <style>
       *{margin:0;padding:5px;}
       html,body{
@@ -13,13 +18,15 @@
           float:left;
       }
       .head2{
-          margin-left: 30px;
+        margin-left: 30px;
           color:mediumslateblue;
-          font-size: 20px;
+          font-size: 30px;
           float:left;
+          margin-left: 100px;
+          margin-top: 10px;
       }
       .body{
-            height:80%;
+            
             width:100%;
             
             border-bottom: 2px solid #8414b1;
@@ -35,25 +42,41 @@
           display:block;
           color:white;
           text-align: center;
-          padding:15px 110px;
+          padding:10px 90px;
           text-decoration: none;
+          font-weight: bolder;
+          font-size: 20px;
       }
-      .navbar a:hover,a:active{
-          background-color: #9932cc;
+      .navbar a:hover {
+          background-color:rgb(108, 11, 187);
       }
-      ul{
+      .selected{
+          background-color: rgb(108, 11, 187);
+      }
+      ul,.vl,.wl{
           list-style-type:none;
-          width:50px;
-          background-color: rgb(156, 44, 156);
+          width:100px;
+          background-color: mediumslateblue;
+          font-weight: bolder;
+          font-size:20px;
+          text-align: center;
       }
-      li a{
+      li a,.vl a,.wl a{
           display:block;
           color:white;
           padding:10px;
           text-decoration:none;
+          height:80px;
       }
-      li a:hover,a:active{
-          background-color: rgb(187, 11, 181);
+      li a:hover,.vl a:hover,.wl a:hover{
+          background-color: rgb(108, 11, 187);
+      }
+      .content{
+          padding-top: 5px;
+          
+      }
+      #content{
+          visibility: hidden;
       }
       .row:after{
          content:"";
@@ -67,8 +90,36 @@
       }
       .main{
           float:right;
-          width:80%;
+          width:85%;
           padding:5px;
+          
+      }
+      #main2,#main3,#main4{
+          visibility: hidden;
+      }
+      .result{
+          border:2px solid   rebeccapurple;
+          margin-top: 20px;
+      }
+      .button1{
+            background-color: rgb(117, 24, 240);
+            border:none;
+            color:white;
+            
+            text-align:center;
+            text-decoration: none;
+            font-size: 20px;
+            
+            margin-left: 40px;
+            margin-top: 2px;
+            margin-bottom: 2px;
+      }
+      .button1:hover{
+            background-color: white;
+            color:rgb(117, 24, 240);
+            font-weight: bolder;
+            border:1px solid rgb(117, 24, 240)
+            
       }
       #zhandian{
           
@@ -79,16 +130,19 @@
             border: 2px solid black;
             background-color: rebeccapurple;
             color:white;
+            width:70px;
+            height:30px;
       }
       #zhandian td{
             font-size:medium;
             border: 2px solid black;
             color:black;
       }
-      .search{
-          height:50px;
-          border-style: solid 5px  rebeccapurple;
+      #zhandian tr.alt td{
+            background-color:rgb(147, 92, 202);
+            color:white;
       }
+      
     </style>
     </head>
     <body>
@@ -100,31 +154,280 @@
         <div class="body">
             
             <div class="navbar">
-                <a href="车次信息">车次信息</a>
-                <a href="途径信息">途径信息</a>
-                <a href="票价">票价</a>
-                <a href="个人中心">个人中心</a>
+                <a>首页</a>
+                <a>车次信息</a>
+                <a>途径信息</a>
+                <a>票价</a>
+                <a>密码修改</a>
             </div>
-            <div class="row">    
-                <div class="side">
-                    <ul>
-                        <li><a href="查看">查看</a></li>
-                        <li><a href="添加">添加</a></li>
-                        <li><a href="删除">删除</a></li>
-                    </ul>
-                </div>
-                <div class="main">
-                    <div class="search">
-                        车次<input type="text" name="carID">&nbsp;&nbsp;
-                        出发地<input type="text" name="from">&nbsp;&nbsp;
-                        目的地<input type="text" name="to">&nbsp;&nbsp;
-                        出发日期<input type="date" name="date"><br>
-                        <button type="submit">添加</button>
-                    
+            <div class="content" id="content">
+                <div class="list"></div>
+                <div class="list">
+                    <div class="row">    
+                        <div class="side">
+                            <ul>
+                                <li><a>查看</a></li>
+                                <li><a>添加</a></li>
+                                <li><a>修改</a></li>
+                                <li><a>删除</a></li>
+                            </ul>
+                        </div>
+                        <div class="main" id="main2">
+                            <div class="list2">
+                                <h style="color: mediumpurple;font-size: 30px;;">已有车次信息：</h>
+                                    <div class="result">
+                                        <table id="zhandian">
+                                            <tr>
+                                                <th>车次</th>
+                                                <th>一等座数量</th>
+                                                <th>二等座数量</th>
+                                            </tr>
+                                        </table>
+                                    </div>
+                            </div>
+                            <div class="list2">
+                                <div class="result" style="height: 140px;">
+                                    车次<input type="text" name="carID">&nbsp;&nbsp;
+                                    一等座数量<input type="number" name="firstnum"><br><br>
+                                    二等座数量<input type="nu1" name="secondnum">&nbsp;&nbsp;
+                                    <button class="button1" type="submit">添加</button>
+                                </div>
+                            </div>
+                            <div class="list2">
+                                <div class="result" style="height: 140px;">
+                                    
+                                    车次<input type="text" name="carID">&nbsp;&nbsp;
+                                    一等座数量<input type="number" name="firstnum"><br><br>
+                                    二等座数量<input type="nu1" name="secondnum">&nbsp;&nbsp;
+                                    <button class="button1" type="submit">修改</button>
+                
+                                </div>
+                            </div>
+                            <div class="list2">
+                                <div class="result" style="height: 140px;">
+                                    车次<input type="text" name="carID">&nbsp;&nbsp;
+                                    <button class="button1" type="submit">删除</button>
+                                </div>
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
-            </div>
-            
+                <div class="list">
+                    <div class="row">    
+                        <div class="side">
+                            <div class="vl">
+                                <a>查看</a>
+                                <a>添加</a>
+                                <a>修改</a>
+                                <a>删除</a>
+                            </div>
+                        </div>
+                        <div class="main" id="main3">
+                            <div class="list3">
+                                <h style="color: mediumpurple;font-size: 30px;;">已有途经信息：</h>
+                                    <div class="result">
+                                        <table id="zhandian">
+                                            <tr>
+                                                <th>途经</th>
+                                                <th>出发地</th>
+                                                <th>目的地</th>
+                                                <th>出发时间</th>
+                                                <th>到达时间</th>
+                                            </tr>
+                                        </table>
+                                    </div>
+                            </div>
+                            <div class="list3">
+                                <div class="result" style="height: 200px;">
+                                    途经<input type="text" name="carID">&nbsp;&nbsp;
+                                    出发地<input type="text" name="from"><br><br>
+                                    目的地<input type="text" name="to">&nbsp;&nbsp;
+                                    出发时间<input type="date" name="date"><br><br>
+                                    到达时间<input type="date" name="date"><br><br>
+                                    <button class="button1" type="submit">添加</button>
+                                </div>
+                            </div>
+                            <div class="list3">
+                                <div class="result" style="height: 200px;">
+                                    途经<input type="text" name="carID">&nbsp;&nbsp;
+                                    出发地<input type="text" name="from"><br><br>
+                                    目的地<input type="text" name="to">&nbsp;&nbsp;
+                                    出发时间<input type="date" name="date"><br><br>
+                                    到达时间<input type="date" name="date"><br><br>
+                                    <button class="button1" type="submit">修改</button>
+                                </div>
+                            </div>
+                            <div class="list3">
+                                <div class="result" style="height: 200px;">
+                                    途经<input type="text" name="carID">&nbsp;&nbsp;
+                                    出发地<input type="text" name="from"><br><br>
+                                    目的地<input type="text" name="to">&nbsp;&nbsp;
+                                    出发时间<input type="date" name="date"><br><br>
+                                    到达时间<input type="date" name="date"><br><br>
+                                    <button class="button1" type="submit">删除</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="list">
+                    <div class="row">    
+                        <div class="side">
+                            <div class="wl">
+                                <a>查看</a>
+                                <a>添加</a>
+                                <a>修改</a>
+                                <a>删除</a>
+                            </div>
+                        </div>
+                        <div class="main" id="main4">
+                            <div class="list4">
+                                <h style="color: mediumpurple;font-size: 30px;;">已有车票信息：</h>
+                                    <div class="result">
+                                        <table id="zhandian">
+                                            <tr>
+                                                
+                                                <th>途经ID</th>
+                                                <th>出发地</th>
+                                                <th>目的地</th>
+                                                <th>一等座票价</th>
+                                                <th>二等座票价</th>
+                                            </tr>
+                                        </table>
+                                    </div>
+                            </div>
+                            <div class="list4">
+                                <div class="result" style="height: 200px;">
+                                    途经ID<input type="text" name="carID">&nbsp;&nbsp;
+                                    出发地<input type="text" name="from"><br><br>
+                                    目的地<input type="text" name="to">&nbsp;&nbsp;
+                                    一等座票价<input type="date" name="date"><br><br>
+                                    二等座票价<input type="date" name="date"><br><br>
+                                    <button class="button1" type="submit">添加</button>
+                                </div>
+                            </div>
+                            <div class="list4">
+                                <div class="result" style="height: 200px;">
+                                    途经ID<input type="text" name="carID">&nbsp;&nbsp;
+                                    出发地<input type="text" name="from"><br><br>
+                                    目的地<input type="text" name="to">&nbsp;&nbsp;
+                                    一等座票价<input type="date" name="date"><br><br>
+                                    二等座票价<input type="date" name="date"><br><br>
+                                    <button class="button1" type="submit">修改</button>
+                                </div>
+                            </div>
+                            <div class="list4">
+                                <div class="result" style="height: 200px;">
+                                    途经ID<input type="text" name="carID">&nbsp;&nbsp;
+                                    出发地<input type="text" name="from"><br><br>
+                                    目的地<input type="text" name="to">&nbsp;&nbsp;
+                                    一等座票价<input type="date" name="date"><br><br>
+                                    二等座票价<input type="date" name="date"><br><br>
+                                    <button class="button1" type="submit">删除</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="list">
+                    <div class="result" style="height: 350px;">
+                        <div class="geren">
+                            
+                            <p class="xinxi">旧密码:</p>
+                            <input type="password" name="pw1" required="required">
+                            <p class="xinxi">新密码:</p>
+                            <input type="password" name="pw2" required="required">
+                            
+                        </div>
+                        <button class="button1" style="margin-left: 250px;" type="submit">修改</button>
+                    </div>
+                </div>
+            </div>   
         </div>
+        <script>
+            $(function(){
+              //获取点击事件的对象
+              $(".navbar a").click(function(){
+                //获取要显示或隐藏的对象
+                var obj= document.getElementById("content");
+                obj.style.visibility="visible";
+                var divShow = $(".content").children('.list');
+                //判断当前对象是否被选中，如果没选中的话进入if循环
+                if (!$(this).hasClass('selected')) {
+                  //获取当前对象的索引
+                  var index = $(this).index();
+                  //当前对象添加选中样式并且其同胞移除选中样式；
+                  $(this).addClass('selected').siblings('a').removeClass('selected');
+                  //索引对应的div块显示
+                  $(divShow[index]).show();
+                  //索引对应的div块的同胞隐藏
+                  $(divShow[index]).siblings('.list').hide();
+                }
+              });
+            });
+            $(function(){
+              //获取点击事件的对象
+              $("li").click(function(){
+                //获取要显示或隐藏的对象
+                var obj= document.getElementById("main2");
+                obj.style.visibility="visible";
+                var divShow = $(".main").children('.list2');
+                //判断当前对象是否被选中，如果没选中的话进入if循环
+                if (!$(this).hasClass('selected')) {
+                  //获取当前对象的索引
+                  var index = $(this).index();
+                  //当前对象添加选中样式并且其同胞移除选中样式；
+                  $(this).addClass('selected').siblings('li').removeClass('selected');
+                  //索引对应的div块显示
+                  $(divShow[index]).show();
+                  //索引对应的div块的同胞隐藏
+                  $(divShow[index]).siblings('.list2').hide();
+                }
+              });
+            });
+            $(function(){
+              //获取点击事件的对象
+              $(".vl a").click(function(){
+                //获取要显示或隐藏的对象
+                var obj= document.getElementById("main3");
+                obj.style.visibility="visible";
+                var divShow = $(".main").children('.list3');
+                //判断当前对象是否被选中，如果没选中的话进入if循环
+                if (!$(this).hasClass('selected')) {
+                  //获取当前对象的索引
+                  var index = $(this).index();
+                  //当前对象添加选中样式并且其同胞移除选中样式；
+                  $(this).addClass('selected').siblings('a').removeClass('selected');
+                  //索引对应的div块显示
+                  $(divShow[index]).show();
+                  //索引对应的div块的同胞隐藏
+                  $(divShow[index]).siblings('.list3').hide();
+                }
+              });
+            });
+            $(function(){
+              //获取点击事件的对象
+              $(".wl a").click(function(){
+                //获取要显示或隐藏的对象
+                var obj= document.getElementById("main4");
+                obj.style.visibility="visible";
+                var divShow = $(".main").children('.list4');
+                //判断当前对象是否被选中，如果没选中的话进入if循环
+                if (!$(this).hasClass('selected')) {
+                  //获取当前对象的索引
+                  var index = $(this).index();
+                  //当前对象添加选中样式并且其同胞移除选中样式；
+                  $(this).addClass('selected').siblings('a').removeClass('selected');
+                  //索引对应的div块显示
+                  $(divShow[index]).show();
+                  //索引对应的div块的同胞隐藏
+                  $(divShow[index]).siblings('.list4').hide();
+                }
+              });
+            });
+        </script>
     </body>
 </html>

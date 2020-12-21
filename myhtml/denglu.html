@@ -2,6 +2,11 @@
 <!DOCTYPE HTML >
 <html>
   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="">
+    <script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
   <style>
       *{margin:0;padding:5px;}
       html,body{
@@ -13,10 +18,10 @@
       .body{
             background: url(huoche.jpg) no-repeat;
             height:80%;
-            width:100%;
+            
             background-size: 100%;
-            opacity: 0.5;
-            filter: alpha(opacity=50;);
+            opacity: 0.8;
+            filter: alpha(opacity=80);
             padding-bottom:5px;
 	          border-top: 40px solid #8414b1;
             border-bottom: 2px solid #8414b1;
@@ -25,11 +30,13 @@
       .login {
 	          margin-top:20px;
           	margin-left: 50px;
-	          padding-top: 50px;
+	          padding-top: 15px;
 	          padding-left: 20px;
-	          width: 400px;
-	          height:300px;
-            border-style: 5px solid black;
+	          width: 350px;
+	          height:280px;
+            opacity: 0.8;
+            filter: alpha(opacity=80);
+            background-color: rgb(184, 153, 245);
           }
         .choose{
           width:100px;
@@ -38,18 +45,18 @@
           
         }
         
-        .shuru{
+        .content{
           width:300px;
           height:300px;
           font-size:medium;
-          padding-left: 105px;
+          padding-left: 125px;
         }
       ul {
           list-style-type: none;
           margin: 0;
           padding: 0;
           overflow: hidden;
-          background-color: #333;
+          background-color:rgb(121, 19, 253) ;
         }
 
       li {
@@ -62,14 +69,43 @@
           text-align: center;
           padding: 14px 15px;
           text-decoration: none;
+          height: 50px;
+          font-weight: bolder;
           }
 
-      li a:hover,a:active {
-         background-color: #111;
+      li a:hover {
+         background-color:white;
+         color:rgb(121, 19, 253);
+         font-weight: bolder;
         }
-      
-
-      
+      .selected{
+        background-color:rgb(58, 8, 139);
+         
+         font-weight: bolder;
+      }
+      p.yhm{
+        color:oldlace;
+        font-size: 20px;
+        padding-bottom: 15px;
+      }
+      .button1{
+        background-color: rgb(117, 24, 240);
+        border:none;
+        color:white;
+        padding:10px;
+        text-align:center;
+        text-decoration: none;
+        font-size: 20px;
+        margin-top: 30px;
+        margin-left: 40px;
+      }
+      .button1:hover{
+        background-color: white;
+        color:rgb(117, 24, 240);
+        font-weight: bold;
+        border:2px solid rgb(117, 24, 240)
+      }
+ 
   </style>
   </head>
   
@@ -81,18 +117,56 @@
     <div class="login">
       <div class="choose">
         <ul>
-          <li><a href="#管理员">管理员登录</a></li>
+          <li ><a href="#管理员">管理员登录</a></li>
           <li><a href="#用户登录">用户登录</a></li>
           <li><a href="#用户注册">用户注册</a></li>
         </ul>
       </div>
-      <div class="shuru">
-        <p>用户名：</p><br>
-        <input type=text" name="user"><br>
-        <p>密码：</p><br>
-        <input type="password" name="password"><br>
-        <button type="submit">提交</button>
+      <div class="content">
+          <div class="list">
+            <p class="yhm">管理员账户：</p>
+            <input type="text" name="user" required="required"><br><br>
+            <p class="yhm">密码:&nbsp;</p>
+            <input type="password" name="password" required="required"><br>
+            <button class="button1" type="submit">登录</button>
+          </div>
+          <div class="list">
+            <p class="yhm">用户名：</p>
+            <input type="text" name="user" required="required"><br><br>
+            <p class="yhm">密码:&nbsp;</p>
+            <input type="password" name="password" required="required"><br>
+            <button class="button1" type="submit">登录</button>
+          </div>
+          <div class="list">
+            <p class="yhm">注册用户名：</p>
+            <input type="text" name="user" required="required"><br><br>
+            <p class="yhm">请输入密码:&nbsp;</p>
+            <input type="password" name="password" required="required"><br>
+            <button class="button1" type="submit">注册</button>
+          </div>
+        
       </div>
+      <script>
+        $(function(){
+          //获取点击事件的对象
+          $("li").click(function(){
+            //获取要显示或隐藏的对象
+            var divShow = $(".content").children('.list');
+            //判断当前对象是否被选中，如果没选中的话进入if循环
+            if (!$(this).hasClass('selected')) {
+              //获取当前对象的索引
+              var index = $(this).index();
+              //当前对象添加选中样式并且其同胞移除选中样式；
+              $(this).addClass('selected').siblings('li').removeClass('selected');
+              //索引对应的div块显示
+              $(divShow[index]).show();
+              //索引对应的div块的同胞隐藏
+              $(divShow[index]).siblings('.list').hide();
+            }
+          });
+        });
+        
+    </script>
     </div>
   </div>
 

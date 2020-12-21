@@ -1,6 +1,11 @@
 <!DOCTYPE HTML >
 <html>
   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="">
+    <script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
   <style>
       *{margin:0;padding:5px;}
       html,body{
@@ -15,15 +20,17 @@
       .head2{
           margin-left: 30px;
           color:mediumslateblue;
-          font-size: 20px;
+          font-size: 30px;
           float:left;
+          margin-left: 100px;
+          margin-top: 10px;
       }
       .body{
-            height:80%;
+            
             width:100%;
             
             border-bottom: 2px solid #8414b1;
-            padding-bottom: 20px;
+            padding-bottom: 10px;
       }
       .navbar{
           overflow:hidden;
@@ -35,11 +42,26 @@
           display:block;
           color:white;
           text-align: center;
-          padding:15px 110px;
+          padding:10px 110px;
+          font-size: 20px;
           text-decoration: none;
       }
-      .navbar a:hover,a:active{
-          background-color: #9932cc;
+      .navbar a:hover{
+          background-color:white;
+          font-weight: bolder;
+          color:mediumslateblue;
+      }
+      .selected{
+          background-color:rgba(143, 69, 212, 0.678);
+          font-weight: bolder;
+          
+      }
+      .content{
+          padding-top: 6px;
+          
+      }
+      #content{
+          visibility: hidden;
       }
       .row:after{
          content:"";
@@ -52,9 +74,52 @@
           padding:5px;
       }
       .main{
-          float:left;
-          width:70%;
+          float:right;
+          width:83%;
           padding:5px;
+          
+      }
+      #main{
+          visibility: hidden;
+      }
+      
+      .button1{
+            background-color: rgb(117, 24, 240);
+            border:none;
+            color:white;
+            
+            text-align:center;
+            text-decoration: none;
+            font-size: 20px;
+            
+            margin-left: 40px;
+            margin-top: 2px;
+            margin-bottom: 2px;
+      }
+      .button1:hover{
+            background-color: white;
+            color:rgb(117, 24, 240);
+            font-weight: bolder;
+            border:1px solid rgb(117, 24, 240)
+            
+      }
+      ul{
+          list-style-type:none;
+          width:80px;
+          
+          background-color: mediumslateblue;
+          font-weight: bolder;;
+      }
+      li a{
+          display:block;
+          color:white;
+          padding:10px;
+          height:100px;
+          text-decoration:none;
+          font-size: 20px;
+      }
+      li a:hover{
+          background-color: rgba(143, 69, 212, 0.678);
       }
       #zhandian{
           
@@ -65,16 +130,39 @@
             border: 2px solid black;
             background-color: rebeccapurple;
             color:white;
+            width:70px;
+            height:30px;
       }
       #zhandian td{
             font-size:medium;
             border: 2px solid black;
             color:black;
       }
+      #zhandian tr.alt td{
+            background-color:rgb(147, 92, 202);
+            color:white;
+      }
       .search{
           height:50px;
-          border-style: solid 5px  rebeccapurple;
+          border:2px solid   rebeccapurple;
       }
+      .result{
+          border:2px solid   rebeccapurple;
+          margin-top: 20px;
+      }
+      .geren{
+          color:black;
+          font-size: 20px;
+          font-weight:bolder;
+          padding-left: 200px;
+          padding-top: 20px;
+          padding-bottom: 20px;
+      }
+      .xinxi{
+          padding-bottom: 10px;
+         
+      }
+      
     </style>
     </head>
     <body>
@@ -86,39 +174,184 @@
         <div class="body">
             
             <div class="navbar">
-                <a href="首页">首页</a>
-                <a href="车票">车票</a>
-                <a href="订单">订单</a>
-                <a href="个人中心">个人中心</a>
+                <a >首页</a>
+                <a>车票</a>
+                <a>订单</a>
+                <a>个人中心</a>
             </div>
-            <div class="row">    
-                <div class="side">
-                    <table id="zhandian">
-                        <tr>
-                            <th>站点ID</th>
-                            <th>站点名称</th>
-                        </tr>
-                        <tr >
-                            <td>001</td>
-                            <td>北京</td>
-                        </tr>
-                        <tr >
-                            <td>002</td>
-                            <td>天津</td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="main">
-                    <div class="search">
-                        出发地<input type="text" name="from">&nbsp;&nbsp;
-                        目的地<input type="text" name="to">&nbsp;&nbsp;
-                        出发日期<input type="date" name="date"><br>
-                        <button type="submit">筛选</button>
+            <div class="content" id="content">
+                <div class="list">
                     
+                </div>
+                <div class="list">
+                    <div class="row">    
+                        <div class="side">
+                            <table id="zhandian">
+                                <tr>
+                                    <th>站点ID</th>
+                                    <th>站点名称</th>
+                                </tr>
+                                <tr >
+                                    <td>001</td>
+                                    <td>北京</td>
+                                </tr>
+                                <tr class="alt">
+                                    <td>002</td>
+                                    <td>天津</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="main">
+                            <div class="search">
+                                <div style="float: left;">
+                                    出发地<input type="text" name="from" value="站点ID1">&nbsp;&nbsp;
+                                    目的地<input type="text" name="to" value="站点ID2">&nbsp;&nbsp;
+                                    出发日期<input type="date" name="date">&nbsp;&nbsp;
+                                    
+                                </div>
+                                <button class="button1" type="submit">筛选</button>
+                            
+                            </div>
+                            <div class="result">
+                                <table id="zhandian">
+                                    <tr>
+                                        <th>车次</th>
+                                        <th>出发站</th>
+                                        <th>到达站</th>
+                                        <th>出发时间</th>
+                                        <th>到达时间</th>
+                                        <th>一等座余量</th>
+                                        <th>一等座票价</th>
+                                        <th>二等座余量</th>
+                                        <th>二等座票价</th>
+
+                                        
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list">
+                    <h style="color: mediumpurple;font-size: 30px;;">我的订单</h>
+                    <div class="result">
+                        <table id="zhandian">
+                            <tr>
+                                <th>车次</th>
+                                <th>出发站</th>
+                                <th>到达站</th>
+                                <th>出发时间</th>
+                                <th>到达时间</th>
+                                <th>座位等级</th>
+                                <th>座位号</th>
+                                <th>乘客姓名</th>
+                                <th>票价</th>
+    
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="list">
+                    <div class="row">    
+                        <div class="side">
+                            <ul>
+                                <li><a>查看个人信息</a></li>
+                                <li><a>修改个人信息</a></li>
+                                <li><a>修改密码</a></li>
+                            </ul>
+                        </div>
+                        <div class="main" id="main">
+                            <div class="list2">
+                                <div class="result">
+                                    <div class="geren">
+                                        <p class="xinxi">用户名：</p>
+                                        <p class="xinxi">姓名：</p>
+                                        <p class="xinxi">证件类型：</p>
+                                        <p class="xinxi">证件号码：</p>
+                                        <p class="xinxi">手机号:</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list2">
+                                <div class="result" style="height: 500px;">
+                                    <div class="geren">
+                                        <p class="xinxi">用户名：</p>
+                                        <input type="text" name="user" required="required">
+                                        <p class="xinxi">姓名：</p>
+                                        <input type="text" name="name" required="required">
+                                        <p class="xinxi">证件类型：</p>
+                                        <input type="text" name="label" required="required">
+                                        <p class="xinxi">证件号码：</p>
+                                        <input type="text" name="line" required="required">
+                                        <p class="xinxi">手机号:</p>
+                                        <input type="text" name="phone" required="required">
+                                    </div>
+                                    <button class="button1" style="margin-left: 250px;" type="submit">修改</button>
+                                </div>
+                            </div>
+                            <div class="list2">
+                                <div class="result" style="height: 350px;">
+                                    <div class="geren">
+                                        <p class="xinxi">用户名：</p>
+                                        <input type="text" name="user" required="required">
+                                        <p class="xinxi">旧密码:</p>
+                                        <input type="password" name="pw1" required="required">
+                                        <p class="xinxi">新密码:</p>
+                                        <input type="password" name="pw2" required="required">
+                                        
+                                    </div>
+                                    <button class="button1" style="margin-left: 250px;" type="submit">修改</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            
+        
         </div>
+        <script>
+            $(function(){
+                
+              //获取点击事件的对象
+              $(".navbar a").click(function(){
+
+                var obj= document.getElementById("content");
+                obj.style.visibility="visible";
+                //获取要显示或隐藏的对象
+                var divShow = $(".content").children('.list');
+                //判断当前对象是否被选中，如果没选中的话进入if循环
+                if (!$(this).hasClass('selected')) {
+                  //获取当前对象的索引
+                  var index = $(this).index();
+                  //当前对象添加选中样式并且其同胞移除选中样式；
+                  $(this).addClass('selected').siblings('a').removeClass('selected');
+                  //索引对应的div块显示
+                  $(divShow[index]).show();
+                  //索引对应的div块的同胞隐藏
+                  $(divShow[index]).siblings('.list').hide();
+                }
+              });
+            });
+            $(function(){
+              //获取点击事件的对象
+              $("li").click(function(){
+                //获取要显示或隐藏的对象
+                var obj= document.getElementById("main");
+                obj.style.visibility="visible";
+                var divShow = $(".main").children('.list2');
+                //判断当前对象是否被选中，如果没选中的话进入if循环
+                if (!$(this).hasClass('selected')) {
+                  //获取当前对象的索引
+                  var index = $(this).index();
+                  //当前对象添加选中样式并且其同胞移除选中样式；
+                  $(this).addClass('selected').siblings('li').removeClass('selected');
+                  //索引对应的div块显示
+                  $(divShow[index]).show();
+                  //索引对应的div块的同胞隐藏
+                  $(divShow[index]).siblings('.list2').hide();
+                }
+              });
+            });
+        </script>
     </body>
 </html>
