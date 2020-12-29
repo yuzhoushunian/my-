@@ -3100,6 +3100,7 @@ def viewComments():
 
 
 # todo:view frequent customer
+# 前端未完成
 @app.route('/frequentCustomer', methods=['GET', 'POST'])
 def frequentCustomer():
     try:
@@ -3124,6 +3125,7 @@ def frequentCustomer():
 
 
 # todo:view flights taken
+# 前端未完成
 @app.route('/view_all_customers', methods=['GET', 'POST'])
 def view_all_customers():
     try:
@@ -3184,6 +3186,7 @@ def viewFlightsTaken():
 
 
 # todo:view ticket sales report
+# 前端未完成
 @app.route('/sales', methods=['GET', 'POST'])
 def sales():
     try:
@@ -3370,6 +3373,7 @@ def salesStaff():
 
 
 # todo:quarterly revenue
+# 缺前端接口
 @app.route('/revenue', methods=['GET', 'POST'])
 def revenue():
     try:
@@ -3408,6 +3412,7 @@ def revenue():
 
 
 # todo:top destinations*3
+# 前端未完成
 @app.route('/topDestination', methods=['GET', 'POST'])
 def topDestination():
     try:
@@ -3473,6 +3478,7 @@ def logout():
 
 
 # ========================END============================
+# you can set secret_key as random
 app.secret_key = 'some key that you will never guess'
 # Run the app on localhost port 5000
 # debug = True -> you don't have to restart flask
