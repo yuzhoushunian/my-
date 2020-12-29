@@ -1,0 +1,35 @@
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <!-- <link rel="stylesheet" href="css/style.css"> -->
+  <title>Air Ticket Online</title>
+</head>
+
+<style type="text/css">
+	table, th, td{
+		border: 1px solid black;
+	}
+</style>
+
+<body>
+  <a href="/logout">Logout</a>
+  / <a href="/staff_home">Back</a>
+  <h1>All Customers</h1>
+  <table>
+  	<th>Email</th>
+    <th>Name</th>
+    <th></th>
+  {% for line in customers %}
+  <tr>
+    <form action="/viewFlightsTaken" method='POST'>
+    	<td><input type="email" name="email" value="{{line['email']}}" readonly/></td>
+      <td><input type="text" name="name" value="{{line['name']}}" readonly/></td>
+      <td><input type="submit" value="View flights taken" /></td>
+    </form>
+  </tr>
+  {% endfor %}
+  </table>
+</body>
+
+</html>

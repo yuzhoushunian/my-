@@ -1,0 +1,36 @@
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <!-- <link rel="stylesheet" href="css/style.css"> -->
+  <title>Air Ticket Online</title>
+</head>
+
+<style type="text/css">
+	table, th, td{
+		border: 1px solid black;
+	}
+</style>
+
+<body>
+  <a href="/logout">Logout</a>
+  / <a href="/view_ratings">Back</a>
+  <h1>View Ratings and Comments</h1>
+  <h2>Flight:</h2>
+  <h3>{{airline_name}} {{flight_number}}</h3>
+  <h3>{{departure_date}} {{departure_time}}</h3>
+  <table>
+  	<th>Customer</th>
+  	<th>Rating</th>
+    <th>Comments</th>
+  {% for line in ratings %}
+  <tr>
+  	<td>{{line['email']}}</td>
+  	<td>{{line['rating']}}</td>
+    <td>{{line['comments']}}</td>
+  </tr>
+  {% endfor %}
+  </table>
+</body>
+
+</html>

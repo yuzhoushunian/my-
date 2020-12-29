@@ -1,0 +1,60 @@
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <!-- <link rel="stylesheet" href="css/style.css"> -->
+  <title>Air Ticket Online</title>
+  <style>
+    
+            
+        
+            .kuang{
+                margin-top: 100px;
+                margin-left: 400px;
+                width: 300px;
+                height:200px;
+                border: 5px solid rgb(206,170,218);
+                padding: 20px 80px;
+            }
+            .z1{
+                font-size: 25px;
+                font-weight: bolder;
+                padding-left: 80px;
+            }
+            .button1{
+                background-color: rgb(132, 114, 162);
+                border:none;
+                color:white;
+                padding:10px;
+                text-align:center;
+                text-decoration: none;
+                font-size: 20px;
+                margin-top: 10px;
+                margin-left: 40px;
+            }
+            .button1:hover{
+                background-color: white;
+                color:rgb(132, 114, 162);
+                font-weight: bold;
+                border:2px solid rgb(132, 114, 162);
+            }
+  </style>
+</head>
+
+<body>
+  <div class="kuang">
+    <form action="/registerAuth" method="POST" style="padding-bottom: 30px;">
+    <p class="z1">用户类型</p>
+    <input class="button1" type="submit" name="usertype" value = Staff />
+    <input class="button1" type="submit" name="usertype" value = Customer />
+  	{% if error %}
+  		<p class="error"><strong>Error:</strong> {{error}}</p>
+  	{% endif %}
+    </form>
+
+  <a class="button1" style="margin-top: 20px;margin-left: 90px;" href="/">Go back</a>
+  </div>
+  
+</body>
+
+</html>

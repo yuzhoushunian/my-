@@ -1,0 +1,41 @@
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <!-- <link rel="stylesheet" href="css/style.css"> -->
+  <title>Air Ticket Online</title>
+</head>
+
+<style type="text/css">
+	table, th, td{
+		border: 1px solid black;
+	}
+</style>
+
+<body>
+  <a href="/logout">Logout</a>
+  / <a href="/staff_home">Back</a>
+  <h1>View Ratings</h1>
+  <table>
+  	<th>Airline</th>
+  	<th>Flight Number</th>
+    <th>Departure Date</th>
+    <th>Departure Time</th>
+    <th>Average Rating</th>
+    <th></th>
+  {% for line in flights %}
+  <tr>
+    <form action="viewComments" method='POST'>
+    	<td><input type="text" name="airline-name" value="{{line['airline_name']}}" readonly/></td>
+    	<td><input type="text" name="flight-number" value="{{line['flight_number']}}" readonly/></td>
+      <td><input type="date" name="departure-date" value="{{line['departure_date']}}" readonly/></td>
+      <td><input type="datetime" name="departure-time" value="{{line['departure_time']}}" readonly/></td>
+      <td><input type="number" name="average-rating" value="{{line['average_rating']}}" readonly/></td>
+      <td><input type="submit" value="View comments" /></td>
+    </form>
+  </tr>
+  {% endfor %}
+  </table>
+</body>
+
+</html>

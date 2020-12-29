@@ -1,0 +1,51 @@
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <!-- <link rel="stylesheet" href="css/style.css"> -->
+  <title>Air Ticket Online</title>
+</head>
+
+<body>
+<a href="/logout">Logout</a>
+/ <a href="/staff_home">Back</a>
+<h1>Quarterly revenue of last year</h1>
+<!-- <div>Total Spending: {{total}}</div> -->
+<div id="piechart" style="height: 400px; width: 80%;"></div>
+</body>
+
+<script>
+  // draw pie chart
+  let quarterly = [];
+  let quarters = ['1st','2nd','3rd','4th']
+  {% if revenues is defined and revenues %}
+    let revenues = {{ revenues | tojson }};
+  {% endif %}
+  for(let i=0; i<4; i++){
+    quarterly.push(revenues[i][0]['sum(sold_price)']);
+  }
+  window.onload = function () {
+    let chart = new CanvasJS.Chart("piechart", {
+      animationEnabled: true,
+      title:{
+        text: "Quarterly Revenue of Last Year"
+      },
+      data: [{
+        type: "pie",
+        showInLegend: true,
+        toolTipContent: "{label}: <strong>¥{y}</strong>",
+        indexLabel: "{label}: ¥{y}",
+        dataPoints: []
+      }]
+    });
+    let parts = [];
+    for(let i=0; i<4; i++){
+      parts.push({y:quarterly[i], name:quarters[i]+" quarter", label:quarters[i]});
+    }
+    chart.render();
+    chart.data[0].set("dataPoints",parts);
+  }
+</script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+</html>

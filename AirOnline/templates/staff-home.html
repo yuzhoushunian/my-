@@ -1,0 +1,281 @@
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <!-- <link rel="stylesheet" href="css/style.css"> -->
+  <title>Air Ticket Online</title>
+</head>
+
+<style type="text/css">
+	*{margin:0;padding:5px;}
+      html,body{
+          height:100%;
+      }
+      .head{    
+            width:30%;
+      }
+      .body{
+            margin-bottom: 20px;
+            
+            background-size: 100%;
+            opacity: 0.8;
+            filter: alpha(opacity=80);
+            padding-bottom:5px;
+	          border-top: 2px solid rgb(137, 173, 128);
+            border-bottom: 2px solid  rgb(137, 173, 128);
+            
+      }
+      .navbar{
+          overflow:hidden;
+          width:100%;
+          background-color:rgb(137, 173, 128);
+      }
+      .navbar a{
+          float:left;
+          display:block;
+          color:rgb(168, 213, 120);
+          text-align: center;
+          padding:10px 90px;
+          text-decoration: none;
+          font-weight: bolder;
+          font-size: 20px;
+      }
+      .navbar a:hover {
+          background-color:rgb(252,197,142);
+      }
+      .content{
+          padding-top: 5px;
+          
+      }
+      
+      .row:after{
+         content:"";
+         display:table;
+         clear:both;
+      }
+      .side{
+          float:left;
+          width:45%;
+          padding:5px;
+      }
+      .main{
+          float:right;
+          width:45%;
+          padding:5px;
+          
+      }
+      .cont1{
+          background-color:rgb(137, 173, 128) ;
+          height:300px;
+          padding: 20px 100px;
+          font-size: 20px;
+          font-weight: bolder;
+          color:rgb(252,197,142);
+          margin-bottom: 20px;
+      }
+      #zhandian{
+          
+          border-collapse: collapse;
+      }
+      #zhandian th{
+            font-size:medium;
+            border: 2px solid rgb(134, 173, 128);
+            background-color:rgb(184, 228, 193);
+            color:white;
+            width:70px;
+            height:30px;
+      }
+      #zhandian td{
+            font-size:medium;
+            border: 2px solid  rgb(237,230,184);
+            background-color: rgb(252,197,142);
+            color:black;
+      }
+      
+      .zi1{
+        color:rgb(252,197,142);
+        font-size: 30px;
+        font-weight: bolder;
+        margin-left: 50px;
+        padding-bottom: 10px;
+      }
+      .button1{
+        background-color: rgb(237,230,184);
+        border:none;
+        color:white;
+        padding:10px;
+        text-align:center;
+        text-decoration: none;
+        font-size: 20px;
+        margin-top: 20px;
+        margin-left: 50px;
+      }
+      .button1:hover{
+        background-color: white;
+        color:rgb(237,230,184);
+        font-weight: bold;
+        border:2px solid rgb(237,230,184)
+      }
+      input[type=text],input[type=time],input[type=date] {
+        margin: 5px 0;
+        box-sizing: border-box;
+        background-color: rgb(237,230,184);
+        color: black;
+        height:25px;
+      }
+      input[type=email],input[type=password],input[type=number]{
+              margin: 5px 0;
+              box-sizing: border-box;
+              border: none;
+              background-color: rgb(237,230,184);
+              color: white;
+              height:30px;
+              padding: 10px;
+      }
+</style>
+
+<body>
+  <div class="head">
+    <img src="/static/image/air3.jpg" height="50px">
+  </div>
+  <div class="body">
+    <div class="navbar">
+      <a href="/logout">退出</a>
+      <a href="/">Public page</a>
+    </div>
+    <div class="content">
+      <p class="zi1">Welcome {{username}}</p>
+      <div class="row">
+        <div class="side">
+          <div class="cont1">
+              
+              <p class="zi1">View flights</p>
+              <form action="/viewFlights" method="POST">
+                date range <br>
+                from <input type="date" name = "from-date" placeholder="YYYY/MM/DD" value="{{from_date}}" /> <br>
+                to <input type="date" style="margin-left: 27px;" name = "to-date" placeholder="YYYY/MM/DD" value="{{to_date}}" /> <br>
+                source <input type="text" style="margin-left: 47px;" name = "source" placeholder="source" /> <br>
+                destination <input type="text" name = "destination" placeholder="destination" /> <br>
+                <input class="button1" type="submit" value = View />
+              </form>
+            
+              <br>
+          </div>
+          <div class="cont1" style="height: 180px;">
+            
+            <p class="zi1" style="margin-left:0px;margin-top: 20px;">Change flight status</p>
+            <form action="/changeStatus" method="POST">
+              <input class="button1" style="margin-left: 60px;" type="submit" value = Change />
+            </form>
+            <br>
+          </div>
+          <div class="cont1" style="height: 230px;">
+           
+            <p class="zi1">Add airplane</p>
+            <form action="/createAirplane" method="POST">
+              airplane id <br>
+              <input type="text" name="airplane-id" placeholder="airplane id" required/><br>
+              seating capacity <input type="number" name="seating-capacity" placeholder="seating capacity" min="1" step="1" required/><br>
+              <input class="button1" style="margin-left: 60px;margin-top: 10px;" type="submit" value = Submit />
+            </form>
+            <br>
+          </div>
+        </div>
+        <div class="main">
+          <div class="cont1" style="height: 540px;padding-left: 40px;padding-right: 20px;">
+            <p class="zi1" style="margin-left:0px;">Create new flight and tickets</p>
+            <div style="padding-left: 60px;">
+              <form action="/createFlight" method="POST">
+              flight number <input type="text" style="margin-left: 15px;" name="flight-number" placeholder="flight number" required/><br>
+              departure date<input type="date" style="margin-left: 10px;" name="departure-date" placeholder="YYYY/MM/DD" required/><br>
+              departure time<input type="time" style="margin-left: 10px;" name="departure-time" step="1" placeholder="HH:MM:SS" required/><br>
+              arrival date<input type="date" style="margin-left: 45px;" name="arrival-date" placeholder="YYYY/MM/DD" required/><br>
+              arrival time<input type="time" style="margin-left: 45px;" name="arrival-time" step="1" placeholder="HH:MM:SS" required/><br>
+              departure airport<input type="text" name="departure-airport" placeholder="departure airport" required/><br>
+              arrival airport<input type="text" style="margin-left: 35px;" name="arrival-airport" placeholder="arrival airport" required/><br>
+              base price<input type="number" style="margin-left: 60px;" name="base-price" placeholder="base price" required/><br>
+              status<br>
+                <input type="radio" id="radio-ontime" name="status" value="on-time" checked/>
+                <label for="radio-ontime">on time</label><br>
+                <input type="radio" id="radio-delayed" name="status" value="delayed" />
+                <label for="radio-delayed">delayed</label><br>
+                <input type="radio" id="radio-cancelled" name="status" value="cancelled" />
+                <label for="radio-cancelled">cancelled</label><br>
+              airplane id<input type="text" style="margin-left: 60px;" name="airplane-id" placeholder="airplane id" required/><br>
+              <input class="button1" style="margin-left: 90px;" type="submit" value = Submit />
+            </form>
+            <br>
+            </div>
+            
+          </div>
+          <div class="cont1" style="height: 230px;">
+            
+            <p class="zi1">Add airport</p>
+            <form action="/createAirport" method="POST">
+              airport name <input type="text" name="airport-name" placeholder="airport name" required/><br>
+              <div style="margin-left: 90px;">
+                city <input type="text" name="city" placeholder="city" required/><br>
+              </div>
+              
+              <input class="button1" style="margin-left: 90px;" type="submit" value = Submit />
+            </form>
+            <br>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+
+  
+
+  
+
+  
+
+  
+<!--  <h2>View analyses</h2>
+  <form action="/view_ratings" method="POST">
+    <div>
+      <label for="submit">Flight ratings</label>
+      <input type="submit" value=Go />
+    </div>
+  </form>
+  <form action="/view_all_customers" method="POST">
+    <div>
+      <label for="submit">All customers</label>
+      <input type="submit" value=Go />
+    </div>
+  </form>
+  <form action="/frequentCustomer" method="POST">
+    <div>
+      <label for="submit">Most frequent customer of last year</label>
+      <input type="submit" value=Go />
+    </div>
+  </form>
+  <form action="/sales" method="POST">
+    <div>
+      <label for="submit">Ticket sales report</label>
+      <input type="submit" value=Go />
+    </div>
+  </form>
+  <form action="/revenue" method="POST">
+    <div>
+      <label for="submit">Quarterly revenue of last year</label>
+      <input type="submit" value=Go />
+    </div>
+  </form>
+  <form action="/topDestination" method="POST">
+    <div>
+      <label for="submit">Top 3 destinations</label>
+      <input type="submit" value=Go />
+    </div>
+  </form>
+  <br>-->
+
+
+</body>
+
+</html>

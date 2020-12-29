@@ -1,0 +1,116 @@
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <!-- <link rel="stylesheet" href="css/style.css"> -->
+  <title>Air Ticket Online</title>
+  <style>
+    *{margin:0;padding:5px;}
+      html,body{
+          height:100%;
+      }
+      .head{    
+            width:30%;
+      }
+      
+      .cont2{
+        float: left;
+        width: 200px;
+        height:300px;
+        font-size: 20px;
+        font-weight: bold;
+        color: rgb(237,230,184);
+        padding-left: 100px;
+      }
+      .cont3{
+        margin-top: 300px;
+        padding-left: 100px;
+      }
+      .body{
+            background-color:  rgb(137, 173, 128);
+            
+            background-size: 100%;
+            opacity: 0.8;
+            filter: alpha(opacity=80);
+            padding-bottom:5px;
+	          border-top: 2px solid rgb(137, 173, 128);
+            border-bottom: 2px solid  rgb(137, 173, 128);
+            
+      }
+    .button1{
+                background-color:rgb(237,230,184);
+                border:none;
+                color:white;
+                padding:10px;
+                text-align:center;
+                text-decoration: none;
+                font-size: 20px;
+                margin-top: 10px;
+                margin-left: 40px;
+            }
+            .button1:hover{
+                background-color: white;
+                color:rgb(237,230,184);
+                font-weight: bold;
+                border:2px solid rgb(237,230,184);
+            }
+  </style>
+</head>
+
+<body>
+  <div class="head">
+    <img src="/static/image/air3.jpg" height="50px">
+  </div>
+  <div class="body">
+    <div class="cont1">
+      <form action="/registerStaffAuth" method="POST">
+        <div class="cont2">
+          用户名<br>
+          <input type="text" name = "username" placeholder="username" required/> <br>
+          航空公司<br>
+          <input type="text" name = "airline-name" placeholder="airline name" required/> <br>
+          密码<br>
+          <input type="password" name = "password" placeholder="password" required/><br>
+        </div>
+        <div class="cont2">
+           姓名<br>
+          <input type="text" name = "first-name" placeholder="first name" required/> <br>
+          姓氏<br>
+          <input type="text" name = "last-name" placeholder="last name" required/> <br>
+          出生日期<br>
+          <input type="date" name = "DOB" placeholder="YYYY/MM/DD" required/> <br>
+          电话号码<br>
+          <div id="phone">
+            <input type="tel" name = "phone-number" placeholder="phone number" required/><br>
+          </div>
+          <button type="button" onclick="addPhone()">添加电话</button><br>
+        </div>
+        <div class="cont3">
+          <input class="button1" type="submit" value = "注册" />
+          {% if error %}
+            <p class="error"><strong>Error:</strong> {{error}}</p>
+          {% endif %}
+        </div>
+      
+      </form>
+      <a class="button1" href="/">Go back</a>
+    </div>
+  </div>
+
+  
+</body>
+
+<script>
+function addPhone(){
+  phoneDiv = document.getElementById("phone");
+  phoneInput = document.createElement("input");
+  br = document.createElement("br");
+  phoneInput.type="tel";
+  phoneInput.name="phone-number";
+  phoneInput.placeholder="phone number";
+  phoneDiv.appendChild(phoneInput);
+  phoneDiv.appendChild(br);
+}
+</script>
+
+</html>

@@ -1,0 +1,68 @@
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <!-- <link rel="stylesheet" href="css/style.css"> -->
+  <title>Air Ticket Online</title>
+</head>
+
+<body>
+<a href="/logout">Logout</a>
+/ <a href="/staff_home">Back</a>
+<h1>Ticket sales</h1>
+<form action="/salesStaff" method="POST">
+  <input type="submit" name="autoChoice" value="View last month" /><br>
+  <input type="submit" name="autoChoice" value="View last year" /><br>
+  date range <br>
+  from <input id="from" type="date" name = "from-date" placeholder="YYYY/MM/DD" value={{from_date}} /> <br>
+  to <input id="to" type="date" name = "to-date" placeholder="YYYY/MM/DD" value={{to_date}} />(not included) <br>
+  <input type="submit" value = View />
+</form>
+<div>Total Sales: {{total}}</div>
+<div id="barchart" style="height: 400px; width: 90%;"></div>
+</body>
+
+
+<script>
+//draw bar chart
+  let monthly = [], Xaxis=[];
+  let months = {{ months | tojson }};
+  {% if monthly_sales is defined and monthly_sales %}
+    let monthly_sales = {{ monthly_sales | tojson }};
+  {% endif %}
+  let display_number = {{display_number}};
+  for(let i=1; i<=display_number; i++){
+    // reversed
+    let index = monthly_sales.length-i;
+    monthly.push(monthly_sales[index][0]['count(ticket_id)']);
+    Xaxis.push(months[index]);
+  }
+  window.onload = function () {
+    let chart = new CanvasJS.Chart("barchart", {
+    	animationEnabled: true,
+    	theme: "light2",
+    	title:{
+    		text: "Monthly Sales"
+    	},
+      axisX: {
+        title: "Month"
+      },
+    	axisY: {
+    		title: "Tickets sold"
+    	},
+    	data: [{
+    		type: "column",
+    		showInLegend: false,
+    		dataPoints: []
+    	}]
+    });
+    let bars = [];
+    for(let i=monthly.length-1; i>=0; i--){
+      bars.push({y:monthly[i], label:Xaxis[i]});
+    }
+    chart.render();
+    chart.data[0].set("dataPoints",bars);
+  }
+</script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</html>

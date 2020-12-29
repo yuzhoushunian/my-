@@ -1,0 +1,66 @@
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <!-- <link rel="stylesheet" href="css/style.css"> -->
+  <title>Air Ticket Online</title>
+</head>
+
+<body>
+<a href="/logout">Logout</a>
+/ <a href="/customer_home">Back</a>
+<h1>Track my spending</h1>
+<form action="/trackCustomer" method="POST">
+  date range <br>
+  from <input id="from" type="date" name = "from-date" placeholder="YYYY/MM/DD" value={{from_date_track}} /> <br>
+  to <input id="to" type="date" name = "to-date" placeholder="YYYY/MM/DD" value={{to_date_track}} />(not included) <br>
+  <input type="submit" value = Track />
+</form>
+<div>Total Spending: {{total}}</div>
+<div id="barchart" style="height: 400px; width: 90%;"></div>
+</body>
+
+
+<script>
+//draw bar chart
+  let monthly = [], Xaxis=[];
+  let months = {{months | tojson}};
+  {% if monthly_spending is defined and monthly_spending %}
+    let monthly_spending = {{ monthly_spending | tojson }};
+  {% endif %}
+  let display_number = {{display_number}};
+  for(let i=1; i<=display_number; i++){
+    // reversed
+    let index = monthly_spending.length-i;
+    monthly.push(monthly_spending[index][0]['sum(sold_price)']);
+    Xaxis.push(months[index]);
+  }
+  window.onload = function () {
+    let chart = new CanvasJS.Chart("barchart", {
+    	animationEnabled: true,
+    	theme: "light2",
+    	title:{
+    		text: "Monthly Spending"
+    	},
+      axisX: {
+        title: "Month"
+      },
+    	axisY: {
+    		title: "Spending (RMB)"
+    	},
+    	data: [{
+    		type: "column",
+    		showInLegend: false,
+    		dataPoints: []
+    	}]
+    });
+    let bars = [];
+    for(let i=monthly.length-1; i>=0; i--){
+      bars.push({y:monthly[i], label:Xaxis[i]});
+    }
+    chart.render();
+    chart.data[0].set("dataPoints",bars);
+  }
+</script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</html>

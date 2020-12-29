@@ -1,0 +1,193 @@
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <!-- <link rel="stylesheet" href="css/style.css"> -->
+  <title>Air Ticket Online</title>
+</head>
+
+<style type="text/css">
+	*{margin:0;padding:5px;}
+      html,body{
+          height:100%;
+      }
+      .head{    
+            width:30%;
+      }
+      .body{
+            background-image: url('tiankong.jpg');
+            background-repeat:no-repeat;
+            height:90%;
+            
+            background-size: 100%;
+            opacity: 0.8;
+            filter: alpha(opacity=80);
+            padding-bottom:5px;
+	          border-top: 2px solid rgb(137, 173, 128);
+            border-bottom: 2px solid  rgb(137, 173, 128);
+            margin-bottom: 10px;
+      }
+      .navbar{
+          overflow:hidden;
+          width:100%;
+          background-color :rgb(137, 173, 128);
+      }
+      .navbar a{
+          float:left;
+          display:block;
+          color:white;
+          text-align: center;
+          padding:10px 90px;
+          text-decoration: none;
+          font-weight: bolder;
+          font-size: 20px;
+      }
+      .navbar a:hover {
+          background-color:white;
+          color:rgb(137, 173, 128) ;
+      }
+      .content{
+          padding-top: 5px;
+          
+      }
+      
+      .row:after{
+         content:"";
+         display:table;
+         clear:both;
+      }
+      .side{
+          float:left;
+          width:45%;
+          padding:5px;
+      }
+      .main{
+          float:right;
+          width:45%;
+          padding:5px;
+          
+      }
+      .cont1{
+          background-color: rgb(137, 173, 128) ;
+          height:300px;
+          padding: 20px 100px;
+          font-size: 20px;
+          font-weight: bolder;
+          color:white;
+      }
+      .zi1{
+        color:white;
+        font-size: 30px;
+        font-weight: bolder;
+        margin-left: 50px;
+        padding-bottom: 10px;
+      }
+      .button1{
+        background-color: rgb(237,230,184);
+        border:none;
+        color:rgb(38,105,1);
+        padding:10px;
+        text-align:center;
+        text-decoration: none;
+        font-size: 20px;
+        margin-top: 20px;
+        margin-left: 50px;
+      }
+      .button1:hover{
+        background-color: white;
+        color:rgb(38,105,1);
+        font-weight: bold;
+        border:2px solid rgb(237,230,184);
+      }
+      input[type=text],input[type=date] {
+        margin: 5px 0;
+        box-sizing: border-box;
+        background-color: rgb(237,230,184);
+        color: black;
+        height:25px;
+      }
+</style>
+
+<body>
+  <div class="head">
+    <img src="/static/image/air3.jpg" height="50px">
+  </div>
+  <div class="body">
+    <div class="navbar">
+      {% if not loggedin%}
+      <a href="/login">登录</a>
+       <a href="/register">注册</a>
+      {% endif %}
+      {% if loggedin %}
+        <a href="/logout">退出</a>
+        {% if usertype == 'staff' %}
+           <a href="/staff_home">Home</a> <br>
+        {% elif usertype == 'customer' %}
+           <a href="/customer_home">Home</a> <br>
+        {% endif %}
+        <br>
+      {% endif %}
+    </div>
+    <div class="content">
+      <div class="row">
+        <div class="side">
+          <div class="cont1">
+            <p class="zi1" style="padding-left: 10px;">搜索航班</p>
+            <form action="/searchPublic" method="POST">
+              出发地 <input type="text" name = "source" placeholder="source" required/> <br>
+              目的地 <input type="text" name = "destination" placeholder="destination" required/> <br>
+              <div id="radio-one-div">
+                <input type="radio" id="radio-one" name="triptype" value="one-way" />
+                <label for="radio-one">单程</label>
+                <input type="radio" id="radio-round" name="triptype" value="round" checked/>
+                <label for="radio-round">往返</label><br>
+              </div>
+              <div style="padding-left: 5px;">
+                出发日期<input type="date" name = "departure-date" placeholder="YYYY/DD/MM" required/> <br>
+              </div>
+              
+               <div id='return-date-div' style="visibility:visible;">            
+              返回日期<input id="return-date" type="date" name = "return-date" placeholder="YYYY/DD/MM" required/> <br>
+              </div>
+              <input class="button1" type="submit" value = Search />
+            </form>
+          </div>
+          
+        </div>
+        <div class="main">
+          <div class="cont1">
+            <p class="zi1">查看航班状态</h2>
+            <form action="/checkIndex" method="POST">
+              航空公司 <input type="text" name="airline_name" placeholder="airline name" required/> <br>
+              航班号 &nbsp;&nbsp;&nbsp;<input type="text" name="flight_number" placeholder="flight number" required/> <br><br>
+              <input type="radio" id="radio-one" name="datetype" value="departure_date" checked/>
+              <label for="radio-one">出发日期</label>
+              <input type="radio" id="radio-two" name="datetype" value="arrival_date" />
+              <label for="radio-two">抵达日期</label><br><br>
+              <input style="margin-left: 40px;" type="date" name = "date" placeholder="YYYY/MM/DD" required/> <br>
+              <input  class="button1" style="margin-left: 80px;" type="submit" value = Check />
+            </form>
+          </div>
+           
+        </div>
+      </div>
+    </div>
+   
+  </div>
+
+
+</body>
+
+<script>
+  document.getElementById("radio-one-div").addEventListener("click",function(){
+    if(document.getElementById('radio-one').checked) {
+      document.getElementById('return-date-div').style.visibility = "hidden";
+      document.getElementById('return-date').removeAttribute("required");
+    }else if(document.getElementById('radio-round').checked) {
+      document.getElementById('return-date-div').style.visibility = "visible";
+      document.getElementById('return-date').setAttribute("required","");
+    }
+  });
+</script>
+
+</html>

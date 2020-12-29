@@ -1,0 +1,107 @@
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <!-- <link rel="stylesheet" href="css/style.css"> -->
+  <title>Air Ticket Online</title>
+  <style>
+    *{margin:0;padding:5px;}
+      html,body{
+          height:100%;
+      }
+      .head{    
+            width:30%;
+      }
+      
+      .cont2{
+        float: left;
+        width: 200px;
+        height:300px;
+        font-size: 20px;
+        font-weight: bold;
+        color: rgb(237,230,184);
+        padding-left: 100px;
+      }
+      .cont3{
+        margin-top: 300px;
+        padding-left: 100px;
+      }
+      .body{
+            
+        background-color:  rgb(137, 173, 128);
+            background-size: 100%;
+            opacity: 0.8;
+            filter: alpha(opacity=80);
+            padding-bottom:5px;
+	          border-top: 2px solid rgb(137, 173, 128);
+            border-bottom: 2px solid  rgb(137, 173, 128);
+            margin-bottom: 20px;
+      }
+    .button1{
+                background-color:rgb(237,230,184);
+                border:none;
+                color:white;
+                padding:10px;
+                text-align:center;
+                text-decoration: none;
+                font-size: 20px;
+                margin-top: 40px;
+                margin-left: 40px;
+            }
+            .button1:hover{
+                background-color: white;
+                color:rgb(237,230,184);
+                font-weight: bold;
+                border:2px solid rgb(237,230,184);
+            }
+  </style>
+</head>
+
+<body>
+  <div class="head">
+    <img src="/static/image/air3.jpg" height="50px">
+  </div>
+  <div class="body">
+    <form action="/registerCustomerAuth" method="POST">
+      <div class="cont2">
+        用户名（邮箱）<br>
+        <input type="email" name = "username" placeholder="email" required/> <br>
+        密码<br>
+        <input type="password" name = "password" placeholder="password" required/><br>
+        姓名<br>
+        <input type="text" name = "name" placeholder="name" required/><br>
+        出生日期<br>
+        <input type="date" name = "DOB" placeholder="YYYY/MM/DD" required/> <br>
+        电话号码<br>
+        <input type="tel" name = "phone-number" placeholder="phone number" required/><br>
+        
+      </div>
+      <div class="cont2">
+        地址<br>
+        建筑物编号 <input type="text" name = "building-number" placeholder="building number" required/><br>
+        街道 <input type="text" name = "street" placeholder="street" required/><br>
+        城市 <input type="text" name = "city" placeholder="city" required/><br>
+        省 <input type="text" name = "state" placeholder="state" required/><br>
+        护照号码<br>
+        <input type="text" name = "passport-number" placeholder="passport number" required/><br>
+        护照过期<br>
+        <input type="date" name = "passport-expiration" placeholder="YYYY/MM/DD" required/><br>
+        护照国家<br>
+        <input type="text" name = "passport-country" placeholder="passport country" required/><br>
+        
+      </div>
+      <div class="cont3">
+        <input class="button1" type="submit" value = Register />
+        {% if error %}
+          <p class="error"><strong>Error:</strong> {{error}}</p>
+  	    {% endif %}
+      </div>
+    
+    </form>
+   <a class="button1" href="/">Go back</a>
+  </div>
+  <p></p>
+  
+</body>
+
+</html>

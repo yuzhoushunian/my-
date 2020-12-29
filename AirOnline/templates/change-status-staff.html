@@ -1,0 +1,180 @@
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <!-- <link rel="stylesheet" href="css/style.css"> -->
+  <title>Air Ticket Online</title>
+</head>
+
+<style type="text/css">
+	*{margin:0;padding:5px;}
+      html,body{
+          height:100%;
+      }
+      .head{    
+            width:30%;
+      }
+      .body{
+            background-image: url('tiankong.jpg');
+            background-repeat:no-repeat;
+            height:80%;
+            
+            background-size: 100%;
+            opacity: 0.8;
+            filter: alpha(opacity=80);
+            padding-bottom:5px;
+	          border-top: 2px solid rgb(137, 173, 128);
+            border-bottom: 2px solid  rgb(137, 173, 128);
+            
+      }
+      .navbar{
+          overflow:hidden;
+          width:100%;
+          background-color:rgb(137, 173, 128);
+      }
+      .navbar a{
+          float:left;
+          display:block;
+          color:rgb(168, 213, 120);
+          text-align: center;
+          padding:10px 90px;
+          text-decoration: none;
+          font-weight: bolder;
+          font-size: 20px;
+      }
+      .navbar a:hover {
+          background-color:rgb(252,197,142);
+      }
+      .content{
+          padding-top: 5px;
+          
+      }
+      
+     
+      .cont1{
+          background-color:rgb(137, 173, 128) ;
+          height:300px;
+          padding: 20px 100px;
+          font-size: 20px;
+          font-weight: bolder;
+          color:rgb(252,197,142);
+          margin-top: 5px;
+          width:30%;
+      }
+      #zhandian{
+          
+          border-collapse: collapse;
+      }
+      #zhandian th{
+            font-size:medium;
+            border: 2px solid rgb(134, 173, 128);
+            background-color:rgb(184, 228, 193);
+            color:white;
+            width:70px;
+            height:30px;
+      }
+      #zhandian td{
+            font-size:medium;
+            border: 2px solid  rgb(237,230,184);
+            background-color: rgb(252,197,142);
+            color:black;
+      }
+      
+      .zi1{
+        color:rgb(252,197,142);
+        font-size: 30px;
+        font-weight: bolder;
+        margin-left: 50px;
+        padding-bottom: 10px;
+      }
+      .zi2{
+        color:rgb(252,197,142);
+        font-size: 20px;
+        font-weight: bolder;
+        margin-left: 50px;
+        padding-bottom: 10px;
+      }
+      .button1{
+        background-color: rgb(237,230,184);
+        border:none;
+        color:white;
+        padding:10px;
+        text-align:center;
+        text-decoration: none;
+        font-size: 20px;
+        margin-top: 20px;
+        margin-left: 50px;
+      }
+      .button1:hover{
+        background-color: white;
+        color:rgb(237,230,184);
+        font-weight: bold;
+        border:2px solid rgb(237,230,184)
+      }
+</style>
+
+<body>
+  <div class="head">
+    <img src="/static/image/air3.jpg" height="50px">
+  </div>
+  <div class="body">
+    <div class="navbar">
+      <a href="/logout">退出</a>
+      <a href="/staff_home">Back</a>
+    </div>
+    <div class="content">
+      <p class="zi1">Change flight status</p>
+    </div>
+    <table id="zhandian">
+  	<th>Airline</th>
+  	<th>Flight Number</th>
+    <th>Departure Date</th>
+    <th>Departure Time</th>
+    <th>Arrival Date</th>
+    <th>Arrival Time</th>
+    <th>Source</th>
+    <th>Destination</th>
+    <th>Status</th>
+  {% for line in flights %}
+  <tr>
+    <form action="/changeStatusStaff" method='POST'>
+    	<td><input type="text" value="{{line['airline_name']}}" readonly/></td>
+    	<td><input type="text" name="flight-number" value="{{line['flight_number']}}" readonly/></td>
+      <td><input type="date" name="departure-date" value="{{line['departure_date']}}" readonly/></td>
+      <td><input type="datetime" name="departure-time" value="{{line['departure_time']}}" readonly/></td>
+      <td><input type="date" value="{{line['arrival_date']}}" readonly/></td>
+      <td><input type="datetime" value="{{line['arrival_time']}}" readonly/></td>
+      <td><input type="text" value="{{line['departure_airport']}}" readonly/></td>
+      <td><input type="text" value="{{line['arrival_airport']}}" readonly/></td>
+      <td id="radio-input">
+        {% if line['status'] == "on-time" %}
+          <input type="radio" id="radio-ontime" name="status" value="on-time" checked/>
+        {% else %}
+          <input type="radio" id="radio-ontime" name="status" value="on-time" />
+        {% endif %}
+        <label for="radio-ontime">on time</label><br>
+        {% if line['status'] == "delayed" %}
+          <input type="radio" id="radio-delayed" name="status" value="delayed" checked/>
+        {% else %}
+          <input type="radio" id="radio-delayed" name="status" value="delayed" />
+        {% endif %}
+        <label for="radio-delayed">delayed</label><br>
+        {% if line['status'] == "cancelled" %}
+          <input type="radio" id="radio-cancelled" name="status" value="cancelled" checked/>
+        {% else %}
+          <input type="radio" id="radio-cancelled" name="status" value="cancelled" />
+        {% endif %}
+        <label for="radio-cancelled">cancelled</label><br>
+      </td>
+      <td><input type="submit" value=Submit /></td>
+    </form>
+  </tr>
+  {% endfor %}
+  </table>
+  </div>
+ 
+  
+  
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <!-- <link rel="stylesheet" href="css/style.css"> -->
+  <title>Air Ticket Online</title>
+</head>
+
+<body>
+<a href="/logout">Logout</a>
+/ <a href="/customer_home">Back</a>
+<h1>Rate my flight</h1>
+
+<form action="/rateCustomer" method="POST">
+  airline <input type="text" name="airline-name" placeholder="airline name" value="{{airline_name}}" readonly/> <br>
+  flight number <input type="text" name="flight-number" placeholder="flight number" value="{{flight_number}}" readonly/> <br>
+  departure date <input type="date" name="departure-date" value="{{departure_date}}" readonly/><br>
+  departure time <input type="datetime" name="departure-time" value="{{departure_time}}" readonly/><br>
+  source <input type="text" name="source" placeholder="source" value="{{source}}" readonly/> <br>
+  destination <input type="text" name="destination" placeholder="destination" value="{{destination}}" readonly/> <br>
+  rate (1-5)<br>
+  <input style="width:30px;" type="number" name = "rate" min="1" max="5" step="1" value="1" required/> <br>
+  comments <br>
+  <input style="word-break:break-word;height:80px;width:30%;" type="text" name = "comment" placeholder="type your comments" required/> <br>
+  <input type="submit" value = Submit />
+</form>
+</body>
+
+</html>

@@ -1,0 +1,137 @@
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <!-- <link rel="stylesheet" href="css/style.css"> -->
+  <title>Air Ticket Online</title>
+</head>
+
+<style type="text/css">
+	*{margin:0;padding:5px;}
+      html,body{
+          height:100%;
+      }
+      .head{    
+            width:30%;
+      }
+      .body{
+            margin-bottom: 20px;
+            
+            background-size: 100%;
+            opacity: 0.8;
+            filter: alpha(opacity=80);
+            padding-bottom:5px;
+	          border-top: 2px solid rgb(137, 173, 128);
+            border-bottom: 2px solid  rgb(137, 173, 128);
+            
+      }
+      .navbar{
+          overflow:hidden;
+          width:100%;
+          background-color:rgb(137, 173, 128);
+      }
+      .navbar a{
+          float:left;
+          display:block;
+          color:rgb(168, 213, 120);
+          text-align: center;
+          padding:10px 90px;
+          text-decoration: none;
+          font-weight: bolder;
+          font-size: 20px;
+      }
+      .navbar a:hover {
+          background-color:rgb(252,197,142);
+      }
+      .content{
+          padding-top: 5px;
+          
+      }
+      
+     
+      .cont1{
+          background-color:rgb(137, 173, 128) ;
+          height:300px;
+          padding: 20px 100px;
+          font-size: 20px;
+          font-weight: bolder;
+          color:rgb(252,197,142);
+          margin-top: 5px;
+          width:30%;
+      }
+      #zhandian{
+          
+          border-collapse: collapse;
+      }
+      #zhandian th{
+            font-size:medium;
+            border: 2px solid rgb(134, 173, 128);
+            background-color:rgb(184, 228, 193);
+            color:white;
+            width:70px;
+            height:30px;
+      }
+      #zhandian td{
+            font-size:medium;
+            border: 2px solid  rgb(237,230,184);
+            background-color: rgb(252,197,142);
+            color:black;
+      }
+      
+      .zi1{
+        color:rgb(252,197,142);
+        font-size: 30px;
+        font-weight: bolder;
+        margin-left: 50px;
+        padding-bottom: 10px;
+      }
+      .zi2{
+        color:rgb(252,197,142);
+        font-size: 20px;
+        font-weight: bolder;
+        margin-left: 50px;
+        padding-bottom: 10px;
+      }
+      
+</style>
+
+<body>
+	<div class="head">
+		<img src="/static/image/air3.jpg" height="50px">
+	  </div>
+	<div class="body">
+		<div class="navbar">
+		  <a href="/logout">退出</a>
+		  <a href="/staff_home">Back</a>
+		  
+		</div>
+		<div class="content">
+			{% if exist_airport %}
+			<h1 class="error"><strong>Error:</strong><h1>
+			<h2>{{exist_airport}}</h2>
+			{% endif %}
+
+			{% if not exist_airport %}
+			<p class="zi1">Airport added successfully</p>
+
+			<p class="zi2">Airports in the system</p>
+			
+			<table id="zhandian">
+				<th>Airport</th>
+				<th>City</th>
+			{% for line in airports %}
+			<tr>
+				<td>{{line['airport_name']}}</td>
+				<td>{{line['city']}}</td>
+			</tr>
+			{% endfor %}
+			</table>
+			{% endif %}
+		</div>
+	</div>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,217 @@
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <!-- <link rel="stylesheet" href="css/style.css"> -->
+  <title>Air Ticket Online</title>
+</head>
+
+<style type="text/css">
+	*{margin:0;padding:5px;}
+      html,body{
+          height:100%;
+      }
+      .head{    
+            width:30%;
+      }
+      .body{
+            background-image: url('tiankong.jpg');
+            background-repeat:no-repeat;
+            margin-bottom: 20px;
+            
+            background-size: 100%;
+            opacity: 0.8;
+            filter: alpha(opacity=80);
+            padding-bottom:5px;
+	          border-top: 2px solid rgb(137, 173, 128);
+            border-bottom: 2px solid  rgb(137, 173, 128);
+            
+      }
+      .navbar{
+          overflow:hidden;
+          width:100%;
+          background-color:rgb(137, 173, 128);
+      }
+      .navbar a{
+          float:left;
+          display:block;
+          color:rgb(168, 213, 120);
+          text-align: center;
+          padding:10px 90px;
+          text-decoration: none;
+          font-weight: bolder;
+          font-size: 20px;
+      }
+      .navbar a:hover {
+          background-color:rgb(252,197,142);
+      }
+      .content{
+          padding-top: 5px;
+          
+      }
+      
+      .row:after{
+         content:"";
+         display:table;
+         clear:both;
+      }
+      .side{
+          float:left;
+          width:45%;
+          padding:5px;
+      }
+      .main{
+          float:right;
+          width:45%;
+          padding:5px;
+          
+      }
+      .cont1{
+          background-color:rgb(137, 173, 128) ;
+          height:300px;
+          padding: 20px 100px;
+          font-size: 20px;
+          font-weight: bolder;
+          color:rgb(252,197,142);
+          margin-top: 5px;
+          width:30%;
+      }
+      #zhandian{
+          
+          border-collapse: collapse;
+      }
+      #zhandian th{
+            font-size:medium;
+            border: 2px solid rgb(134, 173, 128);
+            background-color:rgb(184, 228, 193);
+            color:white;
+            width:70px;
+            height:30px;
+      }
+      #zhandian td{
+            font-size:medium;
+            border: 2px solid  rgb(237,230,184);
+            background-color: rgb(252,197,142);
+            color:black;
+      }
+      
+      .zi1{
+        color:rgb(252,197,142);
+        font-size: 30px;
+        font-weight: bolder;
+        margin-left: 50px;
+        padding-bottom: 10px;
+      }
+      .zi2{
+        color:rgb(252,197,142);
+        font-size: 20px;
+        font-weight: bolder;
+        margin-left: 50px;
+        padding-bottom: 10px;
+      }
+      .button1{
+        background-color: rgb(237,230,184);
+        border:none;
+        color:white;
+        padding:10px;
+        text-align:center;
+        text-decoration: none;
+        font-size: 20px;
+        margin-top: 0px;
+        margin-left: 50px;
+      }
+      .button1:hover{
+        background-color: white;
+        color:rgb(237,230,184);
+        font-weight: bold;
+        border:2px solid rgb(237,230,184)
+      }
+      input[type=text],input[type=date]{
+              margin: 5px 0;
+              box-sizing: border-box;
+              border: none;
+              background-color: rgb(237,230,184);
+              color: black;
+              height:30px;
+              padding: 10px;
+      }
+</style>
+
+<body>
+  <div class="head">
+    <img src="/static/image/air3.jpg" height="50px">
+  </div>
+  <div class="body">
+    <div class="navbar">
+      <a href="/logout">退出</a>
+      <a href="/customer_home">Back</a>
+    </div>
+    <div class="cont1">
+      <p class="zi1">搜索航班</p>
+      <form action="/searchCustomerOneWay" method="POST">
+        出发地 <input type="text" name = "source" placeholder="source" value="{{source}}" required/> <br>
+        目的地 <input type="text" name = "destination" placeholder="destination" value="{{destination}}" required/> <br>
+        <div id="radio-one-div">
+          <input type="radio" id="radio-one" name="triptype" value="one-way" />
+          <label for="radio-one">单程</label>
+          <input type="radio" id="radio-round" name="triptype" value="round" checked/>
+          <label for="radio-round">往返</label><br>
+        </div>
+        <div style="padding-left: 5px;">
+        出发时间 <input type="date" name = "depart-date" placeholder="YYYY/DD/MM" value={{depart_date}} required/> <br>
+        </div>
+        
+        <div id='return-date-div' style="visibility:visible;">
+          返回时间 <input id="return-date" type="date" name = "return-date" placeholder="YYYY/DD/MM" value={{return_date}} required/> <br>
+        </div>
+        <input class="button1" type="submit" value = Search />
+      </form>
+    </div>
+    <div class="cont2">
+      <table id="zhandian">
+      <th>Airline</th>
+      <th>Flight Number</th>
+      <th>Departure Date</th>
+      <th>Departure Time</th>
+      <th>Arrival Date</th>
+      <th>Arrival Time</th>
+      <th>Source</th>
+      <th>Destination</th>
+      <th>Price</th>
+    {% for line in flights %}
+    <tr>
+      <form action="/purchaseCustomerOneWay" method="POST">
+        <td><input type="text" name="airline-name" value="{{line['airline_name']}}" readonly/></td>
+        <td><input type="text" name="flight-number" value="{{line['flight_number']}}" readonly/></td>
+        <td><input type="date" name="departure-date" value="{{line['departure_date']}}" readonly/></td>
+        <td><input tyoe="datetime" name="departure-time" value="{{line['departure_time']}}" readonly/></td>
+        <td><input type="date" name="arrival-date" value="{{line['arrival_date']}}" readonly/></td>
+        <td><input tyoe="datetime" name="arrival-time" value="{{line['arrival_time']}}" readonly/></td>
+        <td><input type="text" name="source" value="{{line['departure_airport']}}" readonly/></td>
+        <td><input type="text" name="destination" value="{{line['arrival_airport']}}" readonly/></td>
+        <td><input type="number" name="price" value="{{line['price']}}" readonly/></td>
+        <td><input type="submit" value=Purchase /></td>
+      </form>
+    </tr>
+    {% endfor %}
+    </table>
+    </div>
+  </div>
+
+
+
+</body>
+
+<script>
+  document.getElementById("radio-one-div").addEventListener("click",function(){
+    if(document.getElementById('radio-one').checked) {
+      document.getElementById('return-date-div').style.visibility = "hidden";
+      document.getElementById('return-date').removeAttribute("required");
+    }else if(document.getElementById('radio-round').checked) {
+      document.getElementById('return-date-div').style.visibility = "visible";
+      document.getElementById('return-date').setAttribute("required","");
+    }
+  });
+</script>
+
+</html>

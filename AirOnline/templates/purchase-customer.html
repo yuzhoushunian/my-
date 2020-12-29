@@ -1,0 +1,180 @@
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <!-- <link rel="stylesheet" href="css/style.css"> -->
+  <title>Air Ticket Online</title>
+</head>
+
+<style type="text/css">
+	*{margin:0;padding:5px;}
+      html,body{
+          height:100%;
+      }
+      .head{    
+            width:30%;
+      }
+      .body{
+           margin-bottom: 20px;
+            background-size: 100%;
+            opacity: 0.8;
+            filter: alpha(opacity=80);
+            padding-bottom:5px;
+	          border-top: 2px solid rgb(137, 173, 128);
+            border-bottom: 2px solid  rgb(137, 173, 128);
+            
+      }
+      .navbar{
+          overflow:hidden;
+          width:100%;
+          background-color:rgb(137, 173, 128);
+      }
+      .navbar a{
+          float:left;
+          display:block;
+          color:rgb(168, 213, 120);
+          text-align: center;
+          padding:10px 90px;
+          text-decoration: none;
+          font-weight: bolder;
+          font-size: 20px;
+      }
+      .navbar a:hover {
+          background-color:rgb(252,197,142);
+      }
+      .content{
+          padding-top: 5px;
+          
+      }
+      
+     
+      .cont1{
+          background-color:rgb(137, 173, 128) ;
+          height:300px;
+          padding: 20px 100px;
+          font-size: 20px;
+          font-weight: bolder;
+          color:rgb(252,197,142);
+          margin-top: 5px;
+          width:30%;
+      }
+      #zhandian{
+          
+          border-collapse: collapse;
+      }
+      #zhandian th{
+            font-size:medium;
+            border: 2px solid rgb(134, 173, 128);
+            background-color:rgb(184, 228, 193);
+            color:white;
+            width:70px;
+            height:30px;
+      }
+      #zhandian td{
+            font-size:medium;
+            border: 2px solid  rgb(237,230,184);
+            background-color: rgb(252,197,142);
+            color:black;
+      }
+      
+      .zi1{
+        color:rgb(252,197,142);
+        font-size: 30px;
+        font-weight: bolder;
+        margin-left: 50px;
+        padding-bottom: 10px;
+      }
+      .zi2{
+        color:rgb(252,197,142);
+        font-size: 20px;
+        font-weight: bolder;
+        margin-left: 50px;
+        padding-bottom: 10px;
+      }
+      .button1{
+        background-color: rgb(237,230,184);
+        border:none;
+        color:white;
+        padding:10px;
+        text-align:center;
+        text-decoration: none;
+        font-size: 20px;
+        margin-top: 20px;
+        margin-left: 50px;
+      }
+      .button1:hover{
+        background-color: white;
+        color:rgb(237,230,184);
+        font-weight: bold;
+        border:2px solid rgb(237,230,184)
+      }
+      input[type=text],input[type=password],input[type=month] {
+        margin: 5px 0;
+        box-sizing: border-box;
+        background-color: rgb(237,230,184);
+        color: black;
+        height:25px;
+      }
+</style>
+
+<body>
+  <div class="head">
+		<img src="/static/image/air3.jpg" height="50px">
+	  </div>
+	<div class="body">
+		<div class="navbar">
+		  <a href="/logout">退出</a>
+		  <a href="/customer_home">Back</a>
+		</div>
+		<div class="content">
+      <p class="zi1">Purchase flight ticket(s)</p>
+      <table id="zhandian">
+        <th>Airline</th>
+        <th>Flight Number</th>
+        <th>Departure Date</th>
+        <th>Departure Time</th>
+        <th>Arrival Date</th>
+        <th>Arrival Time</th>
+        <th>Source</th>
+        <th>Destination</th>
+        <th>Price</th>
+      {% for line in flights %}
+      <tr>
+        <td>{{line['airline_name']}}</td>
+        <td>{{line['flight_number']}}</td>
+        <td>{{line['departure_date']}}</td>
+        <td>{{line['departure_time']}}</td>
+        <td>{{line['arrival_date']}}</td>
+        <td>{{line['arrival_time']}}</td>
+        <td>{{line['departure_airport']}}</td>
+        <td>{{line['arrival_airport']}}</td>
+        <td>{{line['price']}}</td>
+      </tr>
+      {% endfor %}
+      </table>
+      <p class="zi1">Total price: {{total}}</p>
+      <div class="cont1" style="height: 250px;">
+        <form action="/payCustomer" method="POST">
+          <div id="radio-one-div">
+            <input type="radio" id="radio-one" name="cardtype" value="debit card" checked />
+            <label for="radio-one">dedit card</label>
+            <input type="radio" id="radio-round" name="cardtype" value="credit card"/>
+            <label for="radio-round">credit card</label><br>
+          </div>
+          card number <input type="text" style="margin-left: 42px;" name = "card-number" placeholder="card number" required/> <br>
+          name on card <input type="text" style="margin-left: 32px;" name = "name-on-card" placeholder="name on card" required/> <br>
+          security code <input type="password" style="margin-left: 38px;" name = "security-code" placeholder="security code" required/> <br>
+          card expiration date <input type="month"  name = "card-expiration" placeholder="MM/YYYY" required/> <br>
+          <input class="button1" style="margin-left: 80px;" type="submit" value = Pay />
+        </form>
+      </div>
+    </div>
+    
+
+  </div>
+
+
+
+</body>
+
+</html>

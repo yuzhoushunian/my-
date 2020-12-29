@@ -1,0 +1,71 @@
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <!-- <link rel="stylesheet" href="css/style.css"> -->
+  <title>Air Ticket Online</title>
+  <style>
+    .kuang{
+                margin-top: 100px;
+                margin-left: 400px;
+                width: 200px;
+                height:200px;
+                border: 5px solid  rgb(137, 173, 128);
+                padding: 40px 100px;
+                font-size: 25px;
+                font-weight: bolder;
+                color: rgb(237,230,184);
+            }
+            .z1{
+                
+                padding-left: 80px;
+                
+            }
+            .button1{
+                background-color: rgb(237,230,184);
+                border:none;
+                color:white;
+                padding:10px;
+                text-align:center;
+                text-decoration: none;
+                font-size: 20px;
+                margin-top: 10px;
+                margin-left: 40px;
+            }
+            .button1:hover{
+                background-color: white;
+                color:rgb(237,230,184);
+                font-weight: bold;
+                border:2px solid rgb(237,230,184);
+            }
+            input[type=text],input[type=password]{
+              margin: 5px 0;
+              box-sizing: border-box;
+              border: none;
+              background-color: rgb(237,230,184);
+              color: black;
+              height:30px;
+              padding: 10px;
+      }
+  </style>
+</head>
+
+<body>
+  <div class="kuang">
+    <form action="/loginStaffAuth" method="POST">
+    用户名 <br>
+    <input type="text" name = "username" placeholder="username" required/> <br>
+    密码 <br>
+    <input type="password" name = "password" placeholder="password" required/><br>
+  	<input class="button1" type="submit" value = Login />
+  	{% if error %}
+  		<p class="error" style="margin-top: 60px;"><strong>Error:</strong> {{error}}</p>
+  	{% endif %}
+    </form>
+  </div>
+  
+
+  <a class="button1" href="/">Go back</a>
+</body>
+
+</html>
